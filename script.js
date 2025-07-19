@@ -259,27 +259,41 @@ function setupSocialShare() {
     }
 }
 
-// 動的背景の生成
+// 動的背景の生成（時計アイコン付きカウンター）
 function createFloatingNumber() {
     const backgroundEl = document.getElementById('dynamic-background');
     if (!backgroundEl) return;
     
-    const number = Math.floor(Math.random() * 10);
+    // カウンター風の数字を生成（年数、日数、時間など）
+    const counterTypes = [
+        () => Math.floor(Math.random() * 80) + 20, // 年齢（20-99）
+        () => Math.floor(Math.random() * 365) + 1, // 日数（1-365）
+        () => Math.floor(Math.random() * 24), // 時間（0-23）
+        () => Math.floor(Math.random() * 60), // 分（0-59）
+        () => Math.floor(Math.random() * 60), // 秒（0-59）
+    ];
+    
+    const number = counterTypes[Math.floor(Math.random() * counterTypes.length)]();
     const numberEl = document.createElement('div');
     numberEl.className = 'floating-number';
-    numberEl.textContent = number;
+    
+    // 時計アイコンと数字を組み合わせ
+    numberEl.innerHTML = `
+        <i class="fas fa-clock clock-icon"></i>
+        <span>${number}</span>
+    `;
     
     // ランダムな位置に配置
     numberEl.style.left = Math.random() * 100 + '%';
     numberEl.style.top = '100%';
     
-    // レインボースタイルのランダムな色を設定
-    const colors = ['var(--rainbow-red)', 'var(--rainbow-orange)', 'var(--rainbow-yellow)', 'var(--rainbow-green)', 'var(--rainbow-blue)', 'var(--neon-pink)', 'var(--neon-cyan)'];
+    // レインボースタイルのランダムな色を設定（赤色除去）
+    const colors = ['var(--neon-cyan)', 'var(--rainbow-orange)', 'var(--rainbow-yellow)', 'var(--rainbow-green)', 'var(--rainbow-blue)', 'var(--neon-pink)', 'var(--rainbow-violet)'];
     numberEl.style.color = colors[Math.floor(Math.random() * colors.length)];
     
     backgroundEl.appendChild(numberEl);
     
-    // 3秒後に削除
+    // 4秒後に削除
     setTimeout(() => {
         if (numberEl.parentNode) {
             numberEl.parentNode.removeChild(numberEl);
@@ -309,35 +323,46 @@ function stopBackgroundEffect() {
     }
 }
 
-// ヒーローセクションのネオン数字生成
+// ヒーローセクションのネオン数字生成（時計アイコン付きカウンター）
 function createHeroNeonNumber() {
     const heroBackgroundEl = document.getElementById('hero-neon-background');
     if (!heroBackgroundEl) return;
     
-    const number = Math.floor(Math.random() * 10);
+    // より大きなカウンター風の数字を生成
+    const heroCounterTypes = [
+        () => Math.floor(Math.random() * 50) + 30, // 年齢（30-79）
+        () => Math.floor(Math.random() * 1000) + 100, // 日数（100-1099）
+        () => Math.floor(Math.random() * 8760) + 1000, // 時間数（年間）
+    ];
+    
+    const number = heroCounterTypes[Math.floor(Math.random() * heroCounterTypes.length)]();
     const numberEl = document.createElement('div');
     numberEl.className = 'hero-neon-number';
-    numberEl.textContent = number;
+    
+    // 時計アイコンと数字を組み合わせ
+    numberEl.innerHTML = `
+        <i class="fas fa-stopwatch clock-icon"></i>
+        <span>${number}</span>
+    `;
     
     // ランダムな位置に配置
     numberEl.style.left = Math.random() * 100 + '%';
     
-    // レインボー色をランダムに設定
+    // レインボー色をランダムに設定（赤色除去）
     const rainbowColors = [
-        'var(--rainbow-red)',
+        'var(--neon-cyan)',
         'var(--rainbow-orange)', 
         'var(--rainbow-yellow)',
         'var(--rainbow-green)',
         'var(--rainbow-blue)',
         'var(--rainbow-indigo)',
         'var(--rainbow-violet)',
-        'var(--neon-pink)',
-        'var(--neon-cyan)'
+        'var(--neon-pink)'
     ];
     numberEl.style.color = rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
     
     // ランダムなサイズ
-    const size = Math.random() * 8 + 4; // 4rem〜12rem
+    const size = Math.random() * 4 + 3; // 3rem〜7rem
     numberEl.style.fontSize = size + 'rem';
     
     heroBackgroundEl.appendChild(numberEl);

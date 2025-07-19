@@ -12,7 +12,7 @@
     --dark-gray: #1a1a1a;
     --medium-gray: #2a2a2a;
     --light-gray: #444444;
-    --rainbow-red: #ff0000;
+    --rainbow-red: #00ced1;
     --rainbow-orange: #ff8000;
     --rainbow-yellow: #ffff00;
     --rainbow-green: #00ff00;
@@ -21,13 +21,13 @@
     --rainbow-violet: #8000ff;
     --neon-pink: #ff00ff;
     --neon-cyan: #00ffff;
-    --accent-red: #ff0000;
+    --accent-red: #00ced1;
     --accent-orange: #ff8000;
     --accent-yellow: #ffff00;
     --text-white: #ffffff;
     --text-light: #cccccc;
     --text-medium: #888888;
-    --danger-red: #ff0000;
+    --danger-red: #0080ff;
     --warning-orange: #ff8000;
     --success-green: #00ff00;
     
@@ -84,12 +84,25 @@ body {
     position: absolute;
     font-family: var(--font-primary);
     font-weight: 900;
-    font-size: clamp(2rem, 8vw, 8rem);
-    color: var(--rainbow-red);
+    font-size: clamp(1.5rem, 6vw, 6rem);
+    color: var(--neon-cyan);
     text-shadow: 0 0 20px currentColor;
     animation: floatAndFade 4s ease-out forwards;
     pointer-events: none;
-    opacity: 0.8;
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.floating-number .clock-icon {
+    font-size: 0.8em;
+    animation: clockTick 1s infinite;
+}
+
+@keyframes clockTick {
+    0%, 50% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 @keyframes floatAndFade {
@@ -148,7 +161,7 @@ body {
     }
     25% {
         transform: scale(1.05);
-        box-shadow: var(--dramatic-shadow), 0 0 30px var(--rainbow-red);
+        box-shadow: var(--dramatic-shadow), 0 0 30px var(--neon-cyan);
     }
     50% {
         transform: scale(1.1);
@@ -160,10 +173,9 @@ body {
     }
 }
 
-/* ヒーローセクションのハートビート効果 */
+/* ヒーローセクション */
 .hero-section {
     position: relative;
-    animation: heroHeartbeat 3s ease-in-out infinite;
     background: radial-gradient(circle at center, var(--primary-black) 0%, var(--secondary-black) 100%);
     overflow: hidden;
 }
@@ -188,11 +200,27 @@ body {
     position: absolute;
     font-family: var(--font-primary);
     font-weight: 900;
-    font-size: clamp(3rem, 12vw, 12rem);
-    opacity: 0.3;
+    font-size: clamp(2rem, 8vw, 8rem);
+    opacity: 0.4;
     pointer-events: none;
     animation: neonFloat 6s linear infinite;
     text-shadow: var(--neon-glow);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.hero-neon-number .clock-icon {
+    font-size: 0.7em;
+    animation: clockTickHero 2s infinite;
+}
+
+@keyframes clockTickHero {
+    0% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(90deg) scale(1.1); }
+    50% { transform: rotate(180deg) scale(1); }
+    75% { transform: rotate(270deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
 }
 
 @keyframes neonFloat {
@@ -212,117 +240,64 @@ body {
     }
 }
 
-@keyframes heroHeartbeat {
+
+/* ヒーロータイトルのブルー/シアンスタイル */
+.hero-title {
+    font-family: var(--font-hero-title);
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    color: var(--neon-cyan);
+    animation: titleColorChange 2s ease-in-out infinite, titlePulse 2s ease-in-out infinite;
+    text-shadow: 
+        0 0 30px rgba(0, 255, 255, 0.8),
+        0 0 60px rgba(0, 128, 255, 0.5),
+        0 0 90px rgba(128, 0, 255, 0.3);
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5));
+}
+
+/* タイトル色変化アニメーション */
+@keyframes titleColorChange {
+    0%, 100% {
+        color: var(--neon-cyan);
+        text-shadow: 
+            0 0 30px rgba(0, 255, 255, 0.8),
+            0 0 60px rgba(0, 128, 255, 0.5),
+            0 0 90px rgba(128, 0, 255, 0.3);
+    }
+    25% {
+        color: var(--rainbow-blue);
+        text-shadow: 
+            0 0 30px rgba(0, 128, 255, 0.8),
+            0 0 60px rgba(0, 255, 255, 0.5),
+            0 0 90px rgba(0, 128, 255, 0.3);
+    }
+    50% {
+        color: var(--rainbow-violet);
+        text-shadow: 
+            0 0 30px rgba(128, 0, 255, 0.8),
+            0 0 60px rgba(255, 0, 255, 0.5),
+            0 0 90px rgba(128, 0, 255, 0.3);
+    }
+    75% {
+        color: var(--rainbow-green);
+        text-shadow: 
+            0 0 30px rgba(0, 255, 0, 0.8),
+            0 0 60px rgba(0, 255, 255, 0.5),
+            0 0 90px rgba(0, 255, 0, 0.3);
+    }
+}
+
+/* タイトルの軽い脈動アニメーション */
+@keyframes titlePulse {
     0%, 100% {
         transform: scale(1);
-        background: radial-gradient(circle at center, var(--primary-black) 0%, var(--secondary-black) 100%);
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
     }
-    15% {
-        transform: scale(1.02);
-        background: radial-gradient(circle at center, rgba(255, 0, 0, 0.1) 0%, var(--secondary-black) 100%);
-    }
-    30% {
+    50% {
         transform: scale(1.05);
-        background: radial-gradient(circle at center, rgba(255, 255, 0, 0.1) 0%, var(--secondary-black) 100%);
-    }
-    45% {
-        transform: scale(1.02);
-        background: radial-gradient(circle at center, rgba(0, 255, 255, 0.1) 0%, var(--secondary-black) 100%);
-    }
-    60% {
-        transform: scale(1.01);
-        background: radial-gradient(circle at center, rgba(255, 0, 255, 0.1) 0%, var(--secondary-black) 100%);
-    }
-}
-
-/* ヒーロータイトルのスーパーレインボーハートビート */
-.hero-title {
-    animation: superRainbowHeartbeat 1.5s ease-in-out infinite;
-    font-weight: 900;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
-
-@keyframes superRainbowHeartbeat {
-    0% {
-        transform: scale(1);
-        text-shadow: 
-            0 0 20px var(--rainbow-red),
-            0 0 40px var(--rainbow-red),
-            0 0 60px var(--rainbow-red);
-        color: var(--rainbow-red);
-    }
-    12% {
-        transform: scale(1.05);
-        text-shadow: 
-            0 0 25px var(--rainbow-orange),
-            0 0 45px var(--rainbow-orange),
-            0 0 65px var(--rainbow-orange);
-        color: var(--rainbow-orange);
-    }
-    24% {
-        transform: scale(1.1);
-        text-shadow: 
-            0 0 30px var(--rainbow-yellow),
-            0 0 50px var(--rainbow-yellow),
-            0 0 70px var(--rainbow-yellow);
-        color: var(--rainbow-yellow);
-    }
-    36% {
-        transform: scale(1.15);
-        text-shadow: 
-            0 0 35px var(--rainbow-green),
-            0 0 55px var(--rainbow-green),
-            0 0 75px var(--rainbow-green);
-        color: var(--rainbow-green);
-    }
-    48% {
-        transform: scale(1.2);
-        text-shadow: 
-            0 0 40px var(--rainbow-blue),
-            0 0 60px var(--rainbow-blue),
-            0 0 80px var(--rainbow-blue);
-        color: var(--rainbow-blue);
-    }
-    60% {
-        transform: scale(1.15);
-        text-shadow: 
-            0 0 35px var(--rainbow-indigo),
-            0 0 55px var(--rainbow-indigo),
-            0 0 75px var(--rainbow-indigo);
-        color: var(--rainbow-indigo);
-    }
-    72% {
-        transform: scale(1.1);
-        text-shadow: 
-            0 0 30px var(--rainbow-violet),
-            0 0 50px var(--rainbow-violet),
-            0 0 70px var(--rainbow-violet);
-        color: var(--rainbow-violet);
-    }
-    84% {
-        transform: scale(1.05);
-        text-shadow: 
-            0 0 25px var(--neon-pink),
-            0 0 45px var(--neon-pink),
-            0 0 65px var(--neon-pink);
-        color: var(--neon-pink);
-    }
-    96% {
-        transform: scale(1.02);
-        text-shadow: 
-            0 0 20px var(--neon-cyan),
-            0 0 40px var(--neon-cyan),
-            0 0 60px var(--neon-cyan);
-        color: var(--neon-cyan);
-    }
-    100% {
-        transform: scale(1);
-        text-shadow: 
-            0 0 20px var(--rainbow-red),
-            0 0 40px var(--rainbow-red),
-            0 0 60px var(--rainbow-red);
-        color: var(--rainbow-red);
+        filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
     }
 }
 
@@ -335,8 +310,8 @@ body {
 @keyframes catchRainbowHeartbeat {
     0%, 100% {
         transform: scale(1);
-        text-shadow: 0 0 15px var(--rainbow-red);
-        color: var(--rainbow-red);
+        text-shadow: 0 0 15px var(--neon-cyan);
+        color: var(--neon-cyan);
     }
     16% {
         transform: scale(1.02);
@@ -388,7 +363,7 @@ a {
     right: 0;
     z-index: 1000;
     box-shadow: var(--heavy-shadow);
-    border-bottom: 2px solid var(--accent-red);
+    border-bottom: 2px solid var(--neon-cyan);
 }
 
 .main-header .container {
@@ -405,7 +380,7 @@ a {
     color: var(--text-white);
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-shadow: 0 0 10px var(--accent-red);
+    text-shadow: 0 0 10px var(--neon-cyan);
 }
 
 .main-header nav ul {
@@ -426,7 +401,7 @@ a {
 }
 
 .main-header nav ul li a:hover {
-    background-color: var(--accent-red);
+    background-color: var(--neon-cyan);
     color: var(--text-white);
     box-shadow: var(--neon-glow);
     transform: translateY(-2px);
@@ -486,12 +461,12 @@ a {
 .hero-catch {
     font-family: var(--font-secondary);
     font-size: clamp(1rem, 4vw, 1.5rem);
-    color: var(--accent-red);
+    color: var(--neon-cyan);
     margin-bottom: var(--spacing-sm);
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-shadow: 0 0 20px var(--accent-red);
+    text-shadow: 0 0 20px var(--neon-cyan);
 }
 
 .hero-title {
@@ -504,25 +479,25 @@ a {
     text-transform: uppercase;
     letter-spacing: 3px;
     text-shadow: 
-        0 0 30px var(--accent-red),
-        3px 3px 0px var(--accent-red),
-        6px 6px 0px var(--danger-red);
+        0 0 30px var(--neon-cyan),
+        3px 3px 0px var(--neon-cyan),
+        6px 6px 0px var(--rainbow-blue);
     animation: pulse-title 3s ease-in-out infinite alternate;
 }
 
 @keyframes pulse-title {
     0% { 
         text-shadow: 
-            0 0 30px var(--accent-red),
-            3px 3px 0px var(--accent-red),
-            6px 6px 0px var(--danger-red);
+            0 0 30px var(--neon-cyan),
+            3px 3px 0px var(--neon-cyan),
+            6px 6px 0px var(--rainbow-blue);
     }
     100% { 
         text-shadow: 
-            0 0 50px var(--accent-red),
-            3px 3px 0px var(--accent-red),
-            6px 6px 0px var(--danger-red),
-            0 0 80px rgba(255, 8, 68, 0.8);
+            0 0 50px var(--neon-cyan),
+            3px 3px 0px var(--neon-cyan),
+            6px 6px 0px var(--rainbow-blue),
+            0 0 80px rgba(0, 255, 255, 0.8);
     }
 }
 
@@ -536,7 +511,7 @@ a {
 }
 
 .scroll-to-form-btn {
-    background: linear-gradient(135deg, var(--accent-red), var(--danger-red));
+    background: linear-gradient(135deg, var(--neon-cyan), var(--rainbow-blue));
     color: var(--text-white);
     border: none;
     padding: var(--spacing-md) var(--spacing-xxl);
@@ -551,13 +526,13 @@ a {
     overflow: hidden;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border: 2px solid var(--accent-red);
+    border: 2px solid var(--neon-cyan);
 }
 
 .scroll-to-form-btn:hover {
     transform: translateY(-5px) scale(1.05);
     box-shadow: var(--dramatic-shadow), var(--neon-glow);
-    background: linear-gradient(135deg, var(--danger-red), var(--accent-red));
+    background: linear-gradient(135deg, var(--rainbow-blue), var(--neon-cyan));
 }
 
 .scroll-to-form-btn:active {
@@ -705,9 +680,9 @@ a {
 }
 
 .gender-options input[type="radio"]:checked + label {
-    background: linear-gradient(135deg, var(--accent-red), var(--danger-red));
+    background: linear-gradient(135deg, var(--neon-cyan), var(--rainbow-blue));
     color: var(--text-white);
-    border-color: var(--accent-red);
+    border-color: var(--neon-cyan);
     transform: translateY(-3px);
     box-shadow: var(--neon-glow), var(--heavy-shadow);
 }
@@ -757,7 +732,7 @@ a {
 }
 
 .tone-option.spicy i {
-    color: var(--accent-red);
+    color: var(--neon-cyan);
 }
 
 .tone-option.medium i {
@@ -841,8 +816,8 @@ a {
     padding: var(--spacing-lg);
     background: rgba(255, 8, 68, 0.1);
     border-radius: 10px;
-    border-left: 4px solid var(--accent-red);
-    border-right: 4px solid var(--accent-red);
+    border-left: 4px solid var(--neon-cyan);
+    border-right: 4px solid var(--neon-cyan);
 }
 
 #random-excuse {
@@ -896,7 +871,7 @@ a {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--accent-red), var(--accent-orange), var(--accent-yellow));
+    background: linear-gradient(90deg, var(--neon-cyan), var(--accent-orange), var(--accent-yellow));
 }
 
 .countdown-card:hover, .todo-card:hover, .advice-card:hover {
@@ -933,7 +908,7 @@ a {
     min-width: 80px;
     box-shadow: var(--heavy-shadow);
     transition: transform 0.3s ease;
-    border: 2px solid var(--accent-red);
+    border: 2px solid var(--neon-cyan);
     position: relative;
     overflow: hidden;
 }
@@ -945,7 +920,7 @@ a {
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
+    background: linear-gradient(90deg, var(--neon-cyan), var(--accent-orange));
 }
 
 .time-unit:hover {
@@ -958,13 +933,13 @@ a {
     font-size: 2rem;
     font-weight: 900;
     font-family: var(--font-primary);
-    text-shadow: 0 0 20px var(--accent-red);
+    text-shadow: 0 0 20px var(--neon-cyan);
     animation: glow-number 2s ease-in-out infinite alternate;
 }
 
 @keyframes glow-number {
-    0% { text-shadow: 0 0 20px var(--accent-red); }
-    100% { text-shadow: 0 0 30px var(--accent-red), 0 0 40px rgba(255, 8, 68, 0.8); }
+    0% { text-shadow: 0 0 20px var(--neon-cyan); }
+    100% { text-shadow: 0 0 30px var(--neon-cyan), 0 0 40px rgba(0, 255, 255, 0.8); }
 }
 
 .time-unit small {
@@ -1074,7 +1049,7 @@ a {
     margin-bottom: var(--spacing-xxl);
     text-transform: uppercase;
     letter-spacing: 3px;
-    text-shadow: 0 0 30px var(--accent-red);
+    text-shadow: 0 0 30px var(--neon-cyan);
 }
 
 .about-intro {
@@ -1122,8 +1097,8 @@ a {
 }
 
 .message-section h3 i {
-    color: var(--accent-red);
-    filter: drop-shadow(0 0 10px var(--accent-red));
+    color: var(--neon-cyan);
+    filter: drop-shadow(0 0 10px var(--neon-cyan));
 }
 
 .call-to-action h3 i {
@@ -1158,8 +1133,8 @@ a {
 }
 
 .data-card.female i {
-    color: var(--accent-red);
-    filter: drop-shadow(0 0 10px var(--accent-red));
+    color: var(--neon-cyan);
+    filter: drop-shadow(0 0 10px var(--neon-cyan));
 }
 
 .data-card i {
@@ -1256,7 +1231,7 @@ a {
 }
 
 .recipe-link-btn, .share-btn {
-    background: linear-gradient(135deg, var(--accent-orange), var(--accent-red));
+    background: linear-gradient(135deg, var(--accent-orange), var(--neon-cyan));
     color: var(--text-white);
     padding: var(--spacing-md) var(--spacing-lg);
     border-radius: 25px;
@@ -1273,7 +1248,7 @@ a {
 .recipe-link-btn:hover, .share-btn:hover {
     transform: translateY(-5px);
     box-shadow: var(--neon-glow), var(--heavy-shadow);
-    background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+    background: linear-gradient(135deg, var(--neon-cyan), var(--accent-orange));
 }
 
 .share-btn.twitter {
@@ -1304,7 +1279,7 @@ footer {
     color: var(--text-light);
     padding: var(--spacing-xl) 0;
     text-align: center;
-    border-top: 2px solid var(--accent-red);
+    border-top: 2px solid var(--neon-cyan);
 }
 
 /* レスポンシブデザイン */
@@ -1451,7 +1426,7 @@ footer {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(var(--accent-red), var(--accent-orange));
+    background: linear-gradient(var(--neon-cyan), var(--accent-orange));
     border-radius: 6px;
 }
 
