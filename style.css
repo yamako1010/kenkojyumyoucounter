@@ -6,31 +6,42 @@
 }
 
 :root {
-    /* ドラマ24風ダークカラーパレット */
-    --primary-black: #0a0a0a;
-    --secondary-black: #1a1a1a;
-    --dark-gray: #2a2a2a;
-    --medium-gray: #3a3a3a;
-    --light-gray: #5a5a5a;
-    --accent-red: #ff0844;
-    --accent-orange: #ff6b35;
-    --accent-yellow: #ffd700;
+    /* レインボーカラーパレット */
+    --primary-black: #000000;
+    --secondary-black: #111111;
+    --dark-gray: #1a1a1a;
+    --medium-gray: #2a2a2a;
+    --light-gray: #444444;
+    --rainbow-red: #ff0000;
+    --rainbow-orange: #ff8000;
+    --rainbow-yellow: #ffff00;
+    --rainbow-green: #00ff00;
+    --rainbow-blue: #0080ff;
+    --rainbow-indigo: #4000ff;
+    --rainbow-violet: #8000ff;
+    --neon-pink: #ff00ff;
+    --neon-cyan: #00ffff;
+    --accent-red: #ff0000;
+    --accent-orange: #ff8000;
+    --accent-yellow: #ffff00;
     --text-white: #ffffff;
     --text-light: #cccccc;
-    --text-medium: #999999;
-    --danger-red: #dc3545;
-    --warning-orange: #fd7e14;
-    --success-green: #28a745;
+    --text-medium: #888888;
+    --danger-red: #ff0000;
+    --warning-orange: #ff8000;
+    --success-green: #00ff00;
     
-    /* エフェクト */
-    --neon-glow: 0 0 20px rgba(255, 8, 68, 0.5);
-    --heavy-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-    --dramatic-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+    /* レインボーエフェクト */
+    --rainbow-glow: 0 0 30px rgba(255, 0, 255, 0.8);
+    --heavy-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+    --dramatic-shadow: 0 20px 60px rgba(0, 0, 0, 0.95);
+    --neon-glow: 0 0 40px currentColor;
     
-    /* フォント */
-    --font-primary: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
-    --font-secondary: 'Impact', 'Arial Narrow', Arial, sans-serif;
-    --font-body: 'Roboto', 'Noto Sans JP', sans-serif;
+    /* 未来的ネオンスタイルフォント */
+    --font-hero-title: 'Black Ops One', 'Orbitron', 'Impact', sans-serif;
+    --font-primary: 'Orbitron', 'Rajdhani', 'Arial Black', sans-serif;
+    --font-secondary: 'Exo 2', 'Russo One', 'Impact', sans-serif;
+    --font-body: 'Rajdhani', 'Arial', 'Hiragino Sans', 'Meiryo', sans-serif;
     
     /* スペーシング */
     --spacing-xs: 0.25rem;
@@ -53,6 +64,305 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     min-height: 100vh;
+    position: relative;
+}
+
+/* ダイナミック背景カウンター */
+.dynamic-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.15;
+}
+
+.floating-number {
+    position: absolute;
+    font-family: var(--font-primary);
+    font-weight: 900;
+    font-size: clamp(2rem, 8vw, 8rem);
+    color: var(--rainbow-red);
+    text-shadow: 0 0 20px currentColor;
+    animation: floatAndFade 4s ease-out forwards;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+@keyframes floatAndFade {
+    0% {
+        transform: translateY(100px) scale(0.5);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.8;
+        transform: translateY(0) scale(1);
+    }
+    80% {
+        opacity: 0.6;
+        transform: translateY(-50px) scale(1.1);
+    }
+    100% {
+        transform: translateY(-150px) scale(0.8);
+        opacity: 0;
+    }
+}
+
+.floating-number.heartbeat {
+    animation: floatAndFade 4s ease-out forwards, heartbeat 0.8s ease-in-out;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.2);
+        color: var(--rainbow-yellow);
+        text-shadow: 0 0 30px var(--rainbow-yellow);
+    }
+    50% {
+        transform: scale(1.4);
+        color: var(--rainbow-green);
+        text-shadow: 0 0 40px var(--rainbow-green);
+    }
+    75% {
+        transform: scale(1.2);
+        color: var(--rainbow-blue);
+        text-shadow: 0 0 30px var(--rainbow-blue);
+    }
+}
+
+/* カウントダウンのハートビート効果 */
+.countdown.heartbeat {
+    animation: countdownHeartbeat 0.6s ease-in-out;
+}
+
+@keyframes countdownHeartbeat {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: var(--dramatic-shadow);
+    }
+    25% {
+        transform: scale(1.05);
+        box-shadow: var(--dramatic-shadow), 0 0 30px var(--rainbow-red);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: var(--dramatic-shadow), 0 0 40px var(--rainbow-yellow);
+    }
+    75% {
+        transform: scale(1.05);
+        box-shadow: var(--dramatic-shadow), 0 0 30px var(--rainbow-blue);
+    }
+}
+
+/* ヒーローセクションのハートビート効果 */
+.hero-section {
+    position: relative;
+    animation: heroHeartbeat 3s ease-in-out infinite;
+    background: radial-gradient(circle at center, var(--primary-black) 0%, var(--secondary-black) 100%);
+    overflow: hidden;
+}
+
+/* ヒーローセクションのネオン背景 */
+.hero-neon-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-neon-number {
+    position: absolute;
+    font-family: var(--font-primary);
+    font-weight: 900;
+    font-size: clamp(3rem, 12vw, 12rem);
+    opacity: 0.3;
+    pointer-events: none;
+    animation: neonFloat 6s linear infinite;
+    text-shadow: var(--neon-glow);
+}
+
+@keyframes neonFloat {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.4;
+    }
+    90% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateY(-20vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes heroHeartbeat {
+    0%, 100% {
+        transform: scale(1);
+        background: radial-gradient(circle at center, var(--primary-black) 0%, var(--secondary-black) 100%);
+    }
+    15% {
+        transform: scale(1.02);
+        background: radial-gradient(circle at center, rgba(255, 0, 0, 0.1) 0%, var(--secondary-black) 100%);
+    }
+    30% {
+        transform: scale(1.05);
+        background: radial-gradient(circle at center, rgba(255, 255, 0, 0.1) 0%, var(--secondary-black) 100%);
+    }
+    45% {
+        transform: scale(1.02);
+        background: radial-gradient(circle at center, rgba(0, 255, 255, 0.1) 0%, var(--secondary-black) 100%);
+    }
+    60% {
+        transform: scale(1.01);
+        background: radial-gradient(circle at center, rgba(255, 0, 255, 0.1) 0%, var(--secondary-black) 100%);
+    }
+}
+
+/* ヒーロータイトルのスーパーレインボーハートビート */
+.hero-title {
+    animation: superRainbowHeartbeat 1.5s ease-in-out infinite;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+@keyframes superRainbowHeartbeat {
+    0% {
+        transform: scale(1);
+        text-shadow: 
+            0 0 20px var(--rainbow-red),
+            0 0 40px var(--rainbow-red),
+            0 0 60px var(--rainbow-red);
+        color: var(--rainbow-red);
+    }
+    12% {
+        transform: scale(1.05);
+        text-shadow: 
+            0 0 25px var(--rainbow-orange),
+            0 0 45px var(--rainbow-orange),
+            0 0 65px var(--rainbow-orange);
+        color: var(--rainbow-orange);
+    }
+    24% {
+        transform: scale(1.1);
+        text-shadow: 
+            0 0 30px var(--rainbow-yellow),
+            0 0 50px var(--rainbow-yellow),
+            0 0 70px var(--rainbow-yellow);
+        color: var(--rainbow-yellow);
+    }
+    36% {
+        transform: scale(1.15);
+        text-shadow: 
+            0 0 35px var(--rainbow-green),
+            0 0 55px var(--rainbow-green),
+            0 0 75px var(--rainbow-green);
+        color: var(--rainbow-green);
+    }
+    48% {
+        transform: scale(1.2);
+        text-shadow: 
+            0 0 40px var(--rainbow-blue),
+            0 0 60px var(--rainbow-blue),
+            0 0 80px var(--rainbow-blue);
+        color: var(--rainbow-blue);
+    }
+    60% {
+        transform: scale(1.15);
+        text-shadow: 
+            0 0 35px var(--rainbow-indigo),
+            0 0 55px var(--rainbow-indigo),
+            0 0 75px var(--rainbow-indigo);
+        color: var(--rainbow-indigo);
+    }
+    72% {
+        transform: scale(1.1);
+        text-shadow: 
+            0 0 30px var(--rainbow-violet),
+            0 0 50px var(--rainbow-violet),
+            0 0 70px var(--rainbow-violet);
+        color: var(--rainbow-violet);
+    }
+    84% {
+        transform: scale(1.05);
+        text-shadow: 
+            0 0 25px var(--neon-pink),
+            0 0 45px var(--neon-pink),
+            0 0 65px var(--neon-pink);
+        color: var(--neon-pink);
+    }
+    96% {
+        transform: scale(1.02);
+        text-shadow: 
+            0 0 20px var(--neon-cyan),
+            0 0 40px var(--neon-cyan),
+            0 0 60px var(--neon-cyan);
+        color: var(--neon-cyan);
+    }
+    100% {
+        transform: scale(1);
+        text-shadow: 
+            0 0 20px var(--rainbow-red),
+            0 0 40px var(--rainbow-red),
+            0 0 60px var(--rainbow-red);
+        color: var(--rainbow-red);
+    }
+}
+
+/* ヒーローキャッチのハートビート */
+.hero-catch {
+    animation: catchRainbowHeartbeat 2.5s ease-in-out infinite;
+    font-weight: 700;
+}
+
+@keyframes catchRainbowHeartbeat {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 15px var(--rainbow-red);
+        color: var(--rainbow-red);
+    }
+    16% {
+        transform: scale(1.02);
+        text-shadow: 0 0 20px var(--rainbow-orange);
+        color: var(--rainbow-orange);
+    }
+    32% {
+        transform: scale(1.04);
+        text-shadow: 0 0 25px var(--rainbow-yellow);
+        color: var(--rainbow-yellow);
+    }
+    48% {
+        transform: scale(1.06);
+        text-shadow: 0 0 30px var(--rainbow-green);
+        color: var(--rainbow-green);
+    }
+    64% {
+        transform: scale(1.04);
+        text-shadow: 0 0 25px var(--rainbow-blue);
+        color: var(--rainbow-blue);
+    }
+    80% {
+        transform: scale(1.02);
+        text-shadow: 0 0 20px var(--neon-pink);
+        color: var(--neon-pink);
+    }
 }
 
 .container {
@@ -310,23 +620,54 @@ a {
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
 }
 
-.form-group input[type="date"] {
+/* 生年月日入力グループ */
+.birth-date-inputs {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+.date-input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.date-input-group input[type="number"] {
     width: 100%;
     padding: var(--spacing-md);
     border: 2px solid var(--light-gray);
     border-radius: 8px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
     background: var(--primary-black);
     color: var(--text-white);
     transition: all 0.3s ease;
-    font-family: var(--font-body);
+    font-family: var(--font-primary);
+    text-align: center;
+    text-transform: uppercase;
 }
 
-.form-group input[type="date"]:focus {
+.date-input-group input[type="number"]:focus {
     outline: none;
     border-color: var(--accent-orange);
     box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
     background: var(--dark-gray);
+    transform: scale(1.05);
+}
+
+.date-input-group input[type="number"]::placeholder {
+    color: var(--text-medium);
+    opacity: 0.7;
+}
+
+.date-input-group label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: var(--spacing-xs);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
 }
 
 /* ジェンダー選択 */
@@ -1040,6 +1381,11 @@ footer {
     
     .about-section h2 {
         font-size: 2rem;
+    }
+    
+    .birth-date-inputs {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
     }
     
     .recipe-links, .share-buttons {

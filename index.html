@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>健康寿命カウンター | 悔いのない幸せな人生を</title>
+    <title>健康寿命カウンター | 結果にコミットする。</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;700;900&family=Rajdhani:wght@300;400;600;700&family=Russo+One&family=Black+Ops+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <!-- ダイナミック背景カウンター -->
+    <div id="dynamic-background" class="dynamic-background"></div>
     <header class="main-header">
         <div class="container">
-            <h1><a href="#">Healthful Time Cafe</a></h1>
+            <h1><a href="#">Healthful Time</a></h1>
             <nav>
                 <ul>
                     <li><a href="#form-section">始める</a></li>
@@ -23,11 +25,12 @@
 
     <main>
         <section class="hero-section">
+            <div id="hero-neon-background" class="hero-neon-background"></div>
             <div class="hero-content">
-                <h2 class="hero-catch">悔いのない幸せな人生を。</h2>
+                <h2 class="hero-catch">「まだ先」と思ってない？</h2>
                 <h1 class="hero-title">健康寿命カウンター</h1>
-                <p class="hero-sub">この健康寿命カウンターは、その大切な時間をあなたに可視化します。数字が動くたびに、きっと「ハッ」とさせられるはずです。</p>
-                <button class="scroll-to-form-btn">さあ、あなたの時間を計ってみましょう</button>
+                <p class="hero-sub">あなたの健康寿命は有限です。残された時間を可視化し、今この瞬間から人生を変えませんか？数字が刻む現実に、きっと心を奪われるはずです。</p>
+                <button class="scroll-to-form-btn">今すぐあなたの残り時間をチェック</button>
             </div>
         </section>
 
@@ -36,8 +39,21 @@
                 <h3><i class="fas fa-hourglass-start"></i> 健康寿命をチェック</h3>
                 <form id="countdown-form">
                     <div class="form-group">
-                        <label for="dob">生年月日:</label>
-                        <input type="date" id="dob" name="dob" required>
+                        <label for="birth-year">生年月日:</label>
+                        <div class="birth-date-inputs">
+                            <div class="date-input-group">
+                                <input type="number" id="birth-year" name="birth-year" placeholder="1990" min="1900" max="2030" required>
+                                <label for="birth-year">年</label>
+                            </div>
+                            <div class="date-input-group">
+                                <input type="number" id="birth-month" name="birth-month" placeholder="12" min="1" max="12" required>
+                                <label for="birth-month">月</label>
+                            </div>
+                            <div class="date-input-group">
+                                <input type="number" id="birth-day" name="birth-day" placeholder="25" min="1" max="31" required>
+                                <label for="birth-day">日</label>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -119,19 +135,6 @@
             </div>
 
 
-            <div class="future-recipe-container detailed-recipe">
-                <h4>未来へのレシピ: 具体的なヒント</h4>
-                <ul class="recipe-list">
-                    <li><i class="fas fa-running icon-green"></i> <strong>動ける体づくり</strong>: 毎日少しの運動が、未来のあなたを作る。</li>
-                    <li><i class="fas fa-carrot icon-orange"></i> <strong>元気な体をつくる食事</strong>: バランスの取れた食事が、活力を生み出す源。</li>
-                    <li><i class="fas fa-plane-departure icon-blue"></i> <strong>悔いのない体験</strong>: 健康なうちに、心に残る思い出をたくさん作ろう。</li>
-                </ul>
-                <div class="recipe-links">
-                    <a href="#" id="link-exercise" class="recipe-link-btn"><i class="fas fa-dumbbell"></i> 運動のヒントはこちら</a>
-                    <a href="#" id="link-meal" class="recipe-link-btn"><i class="fas fa-apple-alt"></i> 食事のヒントはこちら</a>
-                    <a href="#" id="link-experience" class="recipe-link-btn"><i class="fas fa-globe-americas"></i> 体験のヒントはこちら</a>
-                </div>
-            </div>
 
             <div class="share-buttons-container">
                 <h3>この結果をシェアして、仲間と未来を語り合おう！</h3>
@@ -210,7 +213,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Healthful Time Cafe. All rights reserved.</p>
+            <p>&copy; 2025 Healthful Time. All rights reserved.</p>
         </div>
     </footer>
 

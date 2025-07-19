@@ -52,9 +52,12 @@ const excuses = [
 
 // グローバル変数
 let countdownInterval;
+let backgroundInterval;
+let heroNeonInterval;
 let targetDate;
 let selectedTone = 'medium';
 let currentAdviceIndex = 0;
+let lastSecond = -1;
 
 // DOM要素の取得
 const form = document.getElementById('countdown-form');
@@ -132,6 +135,7 @@ function updateCountdown() {
             </div>
         `;
         clearInterval(countdownInterval);
+        stopBackgroundEffect();
         
         // 超過時のメッセージ
         resultMessage.textContent = "健康寿命を超えても、まだまだ人生は続きます。今日を大切に過ごしましょう。";
@@ -144,6 +148,23 @@ function updateCountdown() {
     const hoursEl = document.getElementById('hours');
     const minutesEl = document.getElementById('minutes');
     const secondsEl = document.getElementById('seconds');
+    
+    // 秒が変わったときのドキドキ演出
+    const currentSecond = timeDiff.seconds;
+    if (lastSecond !== -1 && lastSecond !== currentSecond) {
+        // 全体にハートビート効果を適用
+        const countdown = document.getElementById('countdown');
+        if (countdown) {
+            countdown.classList.add('heartbeat');
+            setTimeout(() => {
+                countdown.classList.remove('heartbeat');
+            }, 600);
+        }
+        
+        // 背景に数字を生成
+        createFloatingNumber();
+    }
+    lastSecond = currentSecond;
     
     if (yearsEl) yearsEl.textContent = String(timeDiff.years).padStart(2, '0');
     if (daysEl) daysEl.textContent = String(timeDiff.days).padStart(3, '0');
@@ -238,25 +259,151 @@ function setupSocialShare() {
     }
 }
 
+// 動的背景の生成
+function createFloatingNumber() {
+    const backgroundEl = document.getElementById('dynamic-background');
+    if (!backgroundEl) return;
+    
+    const number = Math.floor(Math.random() * 10);
+    const numberEl = document.createElement('div');
+    numberEl.className = 'floating-number';
+    numberEl.textContent = number;
+    
+    // ランダムな位置に配置
+    numberEl.style.left = Math.random() * 100 + '%';
+    numberEl.style.top = '100%';
+    
+    // レインボースタイルのランダムな色を設定
+    const colors = ['var(--rainbow-red)', 'var(--rainbow-orange)', 'var(--rainbow-yellow)', 'var(--rainbow-green)', 'var(--rainbow-blue)', 'var(--neon-pink)', 'var(--neon-cyan)'];
+    numberEl.style.color = colors[Math.floor(Math.random() * colors.length)];
+    
+    backgroundEl.appendChild(numberEl);
+    
+    // 3秒後に削除
+    setTimeout(() => {
+        if (numberEl.parentNode) {
+            numberEl.parentNode.removeChild(numberEl);
+        }
+    }, 4000);
+}
+
+// 背景エフェクトの開始
+function startBackgroundEffect() {
+    // 2秒ごとに数字を生成
+    backgroundInterval = setInterval(createFloatingNumber, 2000);
+    // 初回は即座に実行
+    createFloatingNumber();
+}
+
+// 背景エフェクトの停止
+function stopBackgroundEffect() {
+    if (backgroundInterval) {
+        clearInterval(backgroundInterval);
+        backgroundInterval = null;
+    }
+    
+    // 既存の数字をクリア
+    const backgroundEl = document.getElementById('dynamic-background');
+    if (backgroundEl) {
+        backgroundEl.innerHTML = '';
+    }
+}
+
+// ヒーローセクションのネオン数字生成
+function createHeroNeonNumber() {
+    const heroBackgroundEl = document.getElementById('hero-neon-background');
+    if (!heroBackgroundEl) return;
+    
+    const number = Math.floor(Math.random() * 10);
+    const numberEl = document.createElement('div');
+    numberEl.className = 'hero-neon-number';
+    numberEl.textContent = number;
+    
+    // ランダムな位置に配置
+    numberEl.style.left = Math.random() * 100 + '%';
+    
+    // レインボー色をランダムに設定
+    const rainbowColors = [
+        'var(--rainbow-red)',
+        'var(--rainbow-orange)', 
+        'var(--rainbow-yellow)',
+        'var(--rainbow-green)',
+        'var(--rainbow-blue)',
+        'var(--rainbow-indigo)',
+        'var(--rainbow-violet)',
+        'var(--neon-pink)',
+        'var(--neon-cyan)'
+    ];
+    numberEl.style.color = rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
+    
+    // ランダムなサイズ
+    const size = Math.random() * 8 + 4; // 4rem〜12rem
+    numberEl.style.fontSize = size + 'rem';
+    
+    heroBackgroundEl.appendChild(numberEl);
+    
+    // 6秒後に削除（アニメーション終了後）
+    setTimeout(() => {
+        if (numberEl.parentNode) {
+            numberEl.parentNode.removeChild(numberEl);
+        }
+    }, 6000);
+}
+
+// ヒーローセクションのネオン背景開始
+function startHeroNeonBackground() {
+    // 1.5秒ごとに数字を生成
+    heroNeonInterval = setInterval(createHeroNeonNumber, 1500);
+    // 初回は即座に実行
+    createHeroNeonNumber();
+}
+
+// ヒーローセクションのネオン背景停止
+function stopHeroNeonBackground() {
+    if (heroNeonInterval) {
+        clearInterval(heroNeonInterval);
+        heroNeonInterval = null;
+    }
+    
+    // 既存のネオン数字をクリア
+    const heroBackgroundEl = document.getElementById('hero-neon-background');
+    if (heroBackgroundEl) {
+        heroBackgroundEl.innerHTML = '';
+    }
+}
+
 // フォーム送信の処理
 function handleFormSubmit(event) {
     event.preventDefault();
     
     const formData = new FormData(form);
-    const birthDate = formData.get('dob');
+    // 新しい日付入力形式に対応
+    const birthYear = formData.get('birth-year');
+    const birthMonth = formData.get('birth-month');
+    const birthDay = formData.get('birth-day');
     const gender = formData.get('gender');
     const tone = formData.get('advice-tone');
     
+    // 生年月日を結合
+    let birthDate = null;
+    if (birthYear && birthMonth && birthDay) {
+        // YYYY-MM-DD 形式で結合
+        birthDate = `${birthYear}-${String(birthMonth).padStart(2, '0')}-${String(birthDay).padStart(2, '0')}`;
+    }
+    
     // デバッグログ
     console.log('フォーム送信データ:', {
+        birthYear: birthYear,
+        birthMonth: birthMonth,
+        birthDay: birthDay,
         birthDate: birthDate,
         gender: gender,
         tone: tone
     });
     
-    if (!birthDate || !gender || !tone) {
+    if (!birthYear || !birthMonth || !birthDay || !gender || !tone) {
         let missingFields = [];
-        if (!birthDate) missingFields.push('生年月日');
+        if (!birthYear || !birthMonth || !birthDay) missingFields.push('生年月日');
         if (!gender) missingFields.push('性別');
         if (!tone) missingFields.push('アドバイストーン');
         
@@ -287,6 +434,9 @@ function handleFormSubmit(event) {
     // カウントダウン開始
     updateCountdown();
     countdownInterval = setInterval(updateCountdown, 1000);
+    
+    // 背景エフェクト開始
+    startBackgroundEffect();
     
     // アドバイス表示
     displayAdvice();
@@ -366,14 +516,55 @@ function setupScrollAnimations() {
     animateElements.forEach(el => observer.observe(el));
 }
 
-// ページ離脱時の確認
+// ページ離脱時の確認とクリーンアップ
 function setupBeforeUnload() {
     window.addEventListener('beforeunload', function(event) {
         if (countdownInterval) {
+            clearInterval(countdownInterval);
+            stopBackgroundEffect();
+            stopHeroNeonBackground();
             event.preventDefault();
             event.returnValue = '';
         }
     });
+}
+
+// 数値入力の大文字・小文字自動変換とバリデーション
+function setupNumberInputs() {
+    const yearInput = document.getElementById('birth-year');
+    const monthInput = document.getElementById('birth-month');
+    const dayInput = document.getElementById('birth-day');
+    
+    // 年の入力処理
+    if (yearInput) {
+        yearInput.addEventListener('input', function() {
+            let value = this.value.replace(/[^0-9]/g, '');
+            if (value.length > 4) value = value.slice(0, 4);
+            this.value = value;
+        });
+    }
+    
+    // 月の入力処理
+    if (monthInput) {
+        monthInput.addEventListener('input', function() {
+            let value = this.value.replace(/[^0-9]/g, '');
+            if (value.length > 2) value = value.slice(0, 2);
+            if (parseInt(value) > 12) value = '12';
+            if (parseInt(value) < 1 && value.length === 2) value = '01';
+            this.value = value;
+        });
+    }
+    
+    // 日の入力処理
+    if (dayInput) {
+        dayInput.addEventListener('input', function() {
+            let value = this.value.replace(/[^0-9]/g, '');
+            if (value.length > 2) value = value.slice(0, 2);
+            if (parseInt(value) > 31) value = '31';
+            if (parseInt(value) < 1 && value.length === 2) value = '01';
+            this.value = value;
+        });
+    }
 }
 
 // DOMContentLoadedイベント
@@ -381,9 +572,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // 各機能の初期化
     setupToneSelection();
     setupGenderSelection();
+    setupNumberInputs();
     setupScrollAnimations();
     setupSocialShare();
     setupBeforeUnload();
+    
+    // ヒーローセクションのネオン背景を開始
+    startHeroNeonBackground();
     
     // イベントリスナーの設定
     if (form) {
