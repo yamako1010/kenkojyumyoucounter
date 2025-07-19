@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健康寿命カウンター | 悔いのない幸せな人生を</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1><a href="#">Healthful Time Cafe</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="#form-section">始める</a></li>
+                    <li><a href="#about-health-longevity">健康寿命とは？</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h2 class="hero-catch">悔いのない幸せな人生を。</h2>
+                <h1 class="hero-title">健康寿命カウンター</h1>
+                <p class="hero-sub">この健康寿命カウンターは、その大切な時間をあなたに可視化します。数字が動くたびに、きっと「ハッ」とさせられるはずです。</p>
+                <button class="scroll-to-form-btn">さあ、あなたの時間を計ってみましょう</button>
+            </div>
+        </section>
+
+        <section class="form-section container" id="form-section">
+            <div class="form-container cafe-counter-style">
+                <h3><i class="fas fa-hourglass-start"></i> 健康寿命をチェック</h3>
+                <form id="countdown-form">
+                    <div class="form-group">
+                        <label for="dob">生年月日:</label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>性別:</label>
+                        <div class="gender-options">
+                            <input type="radio" id="male" name="gender" value="male" required>
+                            <label for="male"><i class="fas fa-male"></i> 男性</label>
+                            <input type="radio" id="female" name="gender" value="female">
+                            <label for="female"><i class="fas fa-female"></i> 女性</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>アドバイスのトーン:</label>
+                        <div class="tone-options">
+                            <input type="radio" id="tone-spicy" name="advice-tone" value="spicy" required>
+                            <label for="tone-spicy" class="tone-option spicy">
+                                <i class="fas fa-fire"></i>
+                                <span class="tone-label">辛口</span>
+                                <small>厳しく背中を押します</small>
+                            </label>
+
+                            <input type="radio" id="tone-medium" name="advice-tone" value="medium">
+                            <label for="tone-medium" class="tone-option medium">
+                                <i class="fas fa-balance-scale"></i>
+                                <span class="tone-label">中辛</span>
+                                <small>バランスよくアドバイス</small>
+                            </label>
+
+                            <input type="radio" id="tone-sweet" name="advice-tone" value="sweet">
+                            <label for="tone-sweet" class="tone-option sweet">
+                                <i class="fas fa-heart"></i>
+                                <span class="tone-label">甘口</span>
+                                <small>優しく励まします</small>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">健康寿命をチェック！</button>
+                </form>
+                <div class="excuse-collection">
+                    <p id="random-excuse"></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="results-section container hidden" id="results-section">
+            <div class="results-grid">
+                <div class="countdown-card personal-space">
+                    <h3>あなたの健康寿命まで</h3>
+                    <div id="countdown" class="countdown">
+                        <div class="time-unit"><span id="years">00</span><small>年</small></div>
+                        <div class="time-unit"><span id="days">00</span><small>日</small></div>
+                        <div class="time-unit"><span id="hours">00</span><small>時間</small></div>
+                        <div class="time-unit"><span id="minutes">00</span><small>分</small></div>
+                        <div class="time-unit"><span id="seconds">00</span><small>秒</small></div>
+                    </div>
+                    <div class="message-container">
+                        <p id="result-message"></p>
+                    </div>
+                </div>
+
+                <div class="todo-card">
+                    <h3>未来へのレシピ</h3>
+                    <ul id="todo-list">
+                        <li><i class="fas fa-heartbeat icon-green"></i> <strong>健康維持と医療管理</strong>: 定期的な健康診断、運動、バランスの良い食事で体力維持。</li>
+                        <li><i class="fas fa-users icon-blue"></i> <strong>家族や大切な人との時間を過ごす</strong>: 感謝の気持ちを伝え、思い出作りを。</li>
+                        <li><i class="fas fa-paint-brush icon-orange"></i> <strong>やりたいこと・趣味に挑戦</strong>: 新しい習い事や旅行など、健康なうちに実現を。</li>
+                    </ul>
+                </div>
+
+                <div class="advice-card special-blend-panel">
+                    <h3>今日のあなたへのブレンドアドバイス</h3>
+                    <div class="advice-panel">
+                        <p id="advice-text">トーンを選んで、あなたへのアドバイスを受け取りましょう。</p>
+                        <button id="new-advice-btn" class="refresh-btn">別のアドバイスを見る <i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="future-recipe-container detailed-recipe">
+                <h4>未来へのレシピ: 具体的なヒント</h4>
+                <ul class="recipe-list">
+                    <li><i class="fas fa-running icon-green"></i> <strong>動ける体づくり</strong>: 毎日少しの運動が、未来のあなたを作る。</li>
+                    <li><i class="fas fa-carrot icon-orange"></i> <strong>元気な体をつくる食事</strong>: バランスの取れた食事が、活力を生み出す源。</li>
+                    <li><i class="fas fa-plane-departure icon-blue"></i> <strong>悔いのない体験</strong>: 健康なうちに、心に残る思い出をたくさん作ろう。</li>
+                </ul>
+                <div class="recipe-links">
+                    <a href="#" id="link-exercise" class="recipe-link-btn"><i class="fas fa-dumbbell"></i> 運動のヒントはこちら</a>
+                    <a href="#" id="link-meal" class="recipe-link-btn"><i class="fas fa-apple-alt"></i> 食事のヒントはこちら</a>
+                    <a href="#" id="link-experience" class="recipe-link-btn"><i class="fas fa-globe-americas"></i> 体験のヒントはこちら</a>
+                </div>
+            </div>
+
+            <div class="share-buttons-container">
+                <h3>この結果をシェアして、仲間と未来を語り合おう！</h3>
+                <div class="share-buttons">
+                    <a href="#" id="share-twitter" class="share-btn twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="#" id="share-facebook" class="share-btn facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a href="#" id="share-line" class="share-btn line" target="_blank" rel="noopener noreferrer"><i class="fab fa-line"></i> LINE</a>
+                </div>
+                <p class="share-message">この健康寿命カウンターで、あなたの未来をデザインしませんか？</p>
+            </div>
+
+        </section>
+
+        <section class="about-section container" id="about-health-longevity">
+            <div class="about-content">
+                <h2>健康寿命とは？</h2>
+                <p class="about-intro">
+                    人生は一度きり。そして、私たちが本当に自由に、心ゆくまで楽しめる時間には限りがあります。それが、<strong>健康寿命</strong>です。
+                </p>
+                
+                <div class="about-definition">
+                    <h3><i class="fas fa-info-circle"></i> 健康寿命の定義</h3>
+                    <p>
+                        <strong>健康寿命とは、健康上の問題で日常生活が制限されることなく、自立して生活できる期間のこと。</strong>
+                        単に「長生き」を示す平均寿命とは違い、<strong>「どれだけ元気なまま生きられるか」</strong>に焦点を当てています。
+                    </p>
+                </div>
+
+                <div class="health-data">
+                    <h3><i class="fas fa-chart-bar"></i> 日本人の健康寿命（2022年データ）</h3>
+                    <div class="data-cards">
+                        <div class="data-card male">
+                            <i class="fas fa-male"></i>
+                            <h4>男性</h4>
+                            <span class="age">72.57歳</span>
+                        </div>
+                        <div class="data-card female">
+                            <i class="fas fa-female"></i>
+                            <h4>女性</h4>
+                            <span class="age">75.45歳</span>
+                        </div>
+                    </div>
+                    <p class="data-note">
+                        平均寿命と健康寿命の間には、残念ながら数年～10年以上の差があるのが現状です。
+                    </p>
+                </div>
+
+                <div class="message-section">
+                    <h3><i class="fas fa-exclamation-triangle"></i> 「まだ先」と思っていませんか？</h3>
+                    <p>
+                        この健康寿命カウンターは、その大切な時間をあなたに可視化します。数字が動くたびに、きっと「ハッ」とさせられるはずです。
+                    </p>
+                    <p>
+                        もし今日、あなたの健康寿命の期限が見えたら、どうしますか？
+                    </p>
+                </div>
+
+                <div class="call-to-action">
+                    <h3><i class="fas fa-rocket"></i> 今こそ行動の時</h3>
+                    <div class="action-items">
+                        <p><strong>今すぐ、体を動かしませんか？</strong></p>
+                        <p><strong>今すぐ、行きたかった場所へ出かけませんか？</strong></p>
+                        <p><strong>今すぐ、大切な人に「ありがとう」を伝えませんか？</strong></p>
+                    </div>
+                    <p class="closing-message">
+                        このタイマーは、決してあなたを焦らせるものではありません。<br>
+                        むしろ、<strong>「動けるうちに、思いっきり楽しめ！」という、未来からの情熱的なメッセージ</strong>です。
+                    </p>
+                    <p class="final-message">
+                        <strong>いつだって、今が一番若い。行動するなら、最速は「今」です。</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Healthful Time Cafe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

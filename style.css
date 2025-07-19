@@ -1,0 +1,971 @@
+/* リセットとベーススタイル */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* カフェスタイルのカラーパレット */
+    --primary-beige: #f5f3f0;
+    --secondary-beige: #ede9e4;
+    --warm-brown: #8b7355;
+    --dark-brown: #5d4e37;
+    --accent-green: #6b8e5a;
+    --accent-blue: #7ba7bc;
+    --accent-terracotta: #c9705f;
+    --text-dark: #3e2723;
+    --text-medium: #5d4e37;
+    --text-light: #8b7355;
+    --white: #ffffff;
+    --light-shadow: rgba(0, 0, 0, 0.1);
+    --medium-shadow: rgba(0, 0, 0, 0.15);
+    --strong-shadow: rgba(0, 0, 0, 0.2);
+    
+    /* フォント */
+    --font-serif: 'Noto Serif JP', serif;
+    --font-sans: 'Open Sans', 'Noto Sans JP', sans-serif;
+    
+    /* スペーシング */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-xxl: 4rem;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--primary-beige);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+/* ヘッダー */
+.main-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: var(--spacing-sm) 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px var(--light-shadow);
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header h1 a {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark-brown);
+}
+
+.main-header nav ul {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-lg);
+}
+
+.main-header nav ul li a {
+    color: var(--text-medium);
+    font-weight: 600;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.main-header nav ul li a:hover {
+    background-color: var(--secondary-beige);
+    color: var(--accent-terracotta);
+}
+
+/* ヒーローセクション */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(135deg, 
+        rgba(245, 243, 240, 0.9) 0%, 
+        rgba(237, 233, 228, 0.9) 100%),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="cafe-pattern" patternUnits="userSpaceOnUse" width="40" height="40"><circle cx="20" cy="20" r="2" fill="%23c9705f" opacity="0.15"/><circle cx="10" cy="30" r="1.5" fill="%236b8e5a" opacity="0.1"/><circle cx="30" cy="10" r="1" fill="%237ba7bc" opacity="0.12"/></pattern></defs><rect width="100" height="100" fill="url(%23cafe-pattern)"/></svg>');
+    background-size: cover;
+    background-position: center;
+    padding-top: 80px;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    padding: var(--spacing-xl);
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px var(--medium-shadow);
+    backdrop-filter: blur(10px);
+}
+
+.hero-catch {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    color: var(--accent-terracotta);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 400;
+}
+
+.hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+}
+
+.hero-sub {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: var(--text-medium);
+    margin-bottom: var(--spacing-xl);
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+.scroll-to-form-btn {
+    background: linear-gradient(135deg, var(--accent-terracotta), var(--warm-brown));
+    color: var(--white);
+    border: none;
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: 1.2rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--light-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-to-form-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--medium-shadow);
+}
+
+.scroll-to-form-btn:active {
+    transform: translateY(-1px);
+}
+
+/* フォームセクション */
+.form-section {
+    padding: var(--spacing-xxl) 0;
+    background-color: var(--white);
+}
+
+.form-container.cafe-counter-style {
+    max-width: 600px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--primary-beige) 0%, var(--secondary-beige) 100%);
+    padding: var(--spacing-xl);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px var(--medium-shadow);
+    position: relative;
+    border: 3px solid rgba(139, 115, 85, 0.1);
+}
+
+.form-container h3 {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.form-container h3 i {
+    color: var(--accent-terracotta);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-xs);
+    font-size: 1.1rem;
+}
+
+.form-group input[type="date"] {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--secondary-beige);
+    border-radius: 10px;
+    font-size: 1rem;
+    background: var(--white);
+    transition: all 0.3s ease;
+    font-family: var(--font-sans);
+}
+
+.form-group input[type="date"]:focus {
+    outline: none;
+    border-color: var(--accent-terracotta);
+    box-shadow: 0 0 0 3px rgba(201, 112, 95, 0.1);
+}
+
+/* ジェンダー選択 */
+.gender-options {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.gender-options input[type="radio"] {
+    display: none;
+}
+
+.gender-options label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 2px solid var(--secondary-beige);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--white);
+    font-weight: 500;
+}
+
+.gender-options label:hover {
+    background-color: var(--secondary-beige);
+    transform: translateY(-2px);
+}
+
+.gender-options input[type="radio"]:checked + label {
+    background-color: var(--accent-terracotta);
+    color: var(--white);
+    border-color: var(--accent-terracotta);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 112, 95, 0.3);
+}
+
+.gender-options label i {
+    font-size: 1.2rem;
+}
+
+/* トーン選択 */
+.tone-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+}
+
+.tone-options input[type="radio"] {
+    display: none;
+}
+
+.tone-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--spacing-md);
+    border: 2px solid var(--secondary-beige);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--white);
+    min-height: 120px;
+    justify-content: center;
+}
+
+.tone-option:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--light-shadow);
+    border-color: var(--warm-brown);
+}
+
+.tone-option i {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-xs);
+    transition: all 0.3s ease;
+}
+
+.tone-option.spicy i {
+    color: #e74c3c;
+}
+
+.tone-option.medium i {
+    color: #f39c12;
+}
+
+.tone-option.sweet i {
+    color: #e91e63;
+}
+
+.tone-label {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-xs);
+}
+
+.tone-option small {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    line-height: 1.3;
+}
+
+.tone-options input[type="radio"]:checked + .tone-option {
+    border-color: var(--accent-terracotta);
+    background-color: var(--secondary-beige);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px var(--medium-shadow);
+}
+
+.tone-options input[type="radio"]:checked + .tone-option .tone-label {
+    color: var(--accent-terracotta);
+}
+
+.submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+    color: var(--white);
+    border: none;
+    padding: var(--spacing-md);
+    font-size: 1.3rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--light-shadow);
+    margin-top: var(--spacing-md);
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--medium-shadow);
+}
+
+.submit-btn:active {
+    transform: translateY(-1px);
+}
+
+/* 言い訳表示 */
+.excuse-collection {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    border-left: 4px solid var(--accent-terracotta);
+}
+
+#random-excuse {
+    font-style: italic;
+    color: var(--text-medium);
+    font-size: 1rem;
+    text-align: center;
+    margin: 0;
+}
+
+/* 結果セクション */
+.results-section {
+    padding: var(--spacing-xxl) 0;
+    background: linear-gradient(135deg, var(--secondary-beige), var(--primary-beige));
+}
+
+.hidden {
+    display: none;
+}
+
+.fade-in {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.countdown-card, .todo-card, .advice-card {
+    background: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px var(--light-shadow);
+    transition: transform 0.3s ease;
+}
+
+.countdown-card:hover, .todo-card:hover, .advice-card:hover {
+    transform: translateY(-5px);
+}
+
+.countdown-card h3, .todo-card h3, .advice-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+/* カウントダウン表示 */
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.time-unit {
+    background: linear-gradient(135deg, var(--accent-terracotta), var(--warm-brown));
+    color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: 15px;
+    text-align: center;
+    min-width: 70px;
+    box-shadow: 0 4px 15px var(--light-shadow);
+    transition: transform 0.3s ease;
+}
+
+.time-unit:hover {
+    transform: scale(1.05);
+}
+
+.time-unit span {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: var(--font-serif);
+}
+
+.time-unit small {
+    display: block;
+    font-size: 0.8rem;
+    margin-top: var(--spacing-xs);
+    opacity: 0.9;
+}
+
+.message-container p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    font-style: italic;
+}
+
+/* ToDoリスト */
+#todo-list, .recipe-list {
+    list-style: none;
+    padding: 0;
+}
+
+#todo-list li, .recipe-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm);
+    background: var(--primary-beige);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+#todo-list li:hover, .recipe-list li:hover {
+    transform: translateX(5px);
+}
+
+.icon-green { color: var(--accent-green); }
+.icon-blue { color: var(--accent-blue); }
+.icon-orange { color: var(--accent-terracotta); }
+
+/* アドバイスパネル */
+.advice-panel {
+    background: linear-gradient(135deg, var(--dark-brown), var(--warm-brown));
+    color: var(--white);
+    padding: var(--spacing-lg);
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+}
+
+#advice-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+    font-style: italic;
+    font-family: var(--font-serif);
+}
+
+.refresh-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-sans);
+}
+
+.refresh-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* 詳細メッセージ */
+.post-result-message {
+    background: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px var(--light-shadow);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.8;
+}
+
+.post-result-message h4 {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.health-data-list {
+    background: var(--primary-beige);
+    padding: var(--spacing-md);
+    border-radius: 10px;
+    margin: var(--spacing-md) 0;
+}
+
+.health-data-list li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.call-to-action-buttons p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--accent-terracotta);
+    margin: var(--spacing-lg) 0;
+    line-height: 1.6;
+}
+
+/* レシピリンク */
+.future-recipe-container {
+    background: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px var(--light-shadow);
+    margin-bottom: var(--spacing-xl);
+}
+
+.future-recipe-container h4 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.recipe-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    margin-top: var(--spacing-lg);
+}
+
+.recipe-link-btn {
+    background: linear-gradient(135deg, var(--warm-brown), var(--accent-terracotta));
+    color: var(--white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.recipe-link-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px var(--medium-shadow);
+}
+
+/* SNS共有ボタン */
+.share-buttons-container {
+    background: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px var(--light-shadow);
+    text-align: center;
+}
+
+.share-buttons-container h3 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+}
+
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-md);
+}
+
+.share-btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--white);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.share-btn.twitter {
+    background: #1da1f2;
+}
+
+.share-btn.facebook {
+    background: #4267b2;
+}
+
+.share-btn.line {
+    background: #00b900;
+}
+
+.share-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px var(--medium-shadow);
+}
+
+.share-message {
+    color: var(--text-medium);
+    font-style: italic;
+}
+
+/* 健康寿命説明セクション */
+.about-section {
+    padding: var(--spacing-xxl) 0;
+    background: linear-gradient(135deg, var(--white), var(--primary-beige));
+}
+
+.about-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-section h2 {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.about-intro {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-medium);
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    background: var(--white);
+    padding: var(--spacing-lg);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px var(--light-shadow);
+}
+
+.about-definition, .health-data, .message-section, .call-to-action {
+    background: var(--white);
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px var(--light-shadow);
+}
+
+.about-definition h3, .health-data h3, .message-section h3, .call-to-action h3 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.about-definition h3 i {
+    color: var(--accent-blue);
+}
+
+.health-data h3 i {
+    color: var(--accent-green);
+}
+
+.message-section h3 i {
+    color: var(--accent-terracotta);
+}
+
+.call-to-action h3 i {
+    color: var(--warm-brown);
+}
+
+.data-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+}
+
+.data-card {
+    background: var(--primary-beige);
+    padding: var(--spacing-md);
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.data-card:hover {
+    transform: translateY(-3px);
+}
+
+.data-card.male i {
+    color: var(--accent-blue);
+}
+
+.data-card.female i {
+    color: var(--accent-terracotta);
+}
+
+.data-card i {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.data-card h4 {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-xs);
+}
+
+.data-card .age {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-terracotta);
+    font-family: var(--font-serif);
+}
+
+.data-note {
+    color: var(--text-medium);
+    font-style: italic;
+    text-align: center;
+    margin-top: var(--spacing-md);
+}
+
+.action-items {
+    margin: var(--spacing-md) 0;
+}
+
+.action-items p {
+    margin-bottom: var(--spacing-sm);
+    color: var(--accent-terracotta);
+    font-size: 1.1rem;
+}
+
+.closing-message, .final-message {
+    color: var(--text-medium);
+    line-height: 1.8;
+    margin-top: var(--spacing-md);
+}
+
+.final-message {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--accent-terracotta);
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background: var(--secondary-beige);
+    border-radius: 10px;
+}
+
+/* フッター */
+footer {
+    background-color: var(--dark-brown);
+    color: var(--primary-beige);
+    padding: var(--spacing-lg) 0;
+    text-align: center;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .main-header .container {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .main-header nav ul {
+        gap: var(--spacing-md);
+    }
+    
+    .hero-content {
+        padding: var(--spacing-lg);
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-sub {
+        font-size: 1.1rem;
+    }
+    
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .countdown {
+        gap: var(--spacing-xs);
+    }
+    
+    .time-unit {
+        min-width: 60px;
+        padding: var(--spacing-sm);
+    }
+    
+    .time-unit span {
+        font-size: 1.4rem;
+    }
+    
+    .gender-options {
+        flex-direction: column;
+    }
+    
+    .tone-options {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .tone-option {
+        min-height: 80px;
+        padding: var(--spacing-sm);
+    }
+    
+    .tone-option i {
+        font-size: 1.5rem;
+    }
+    
+    .data-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-section h2 {
+        font-size: 2rem;
+    }
+    
+    .recipe-links {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .share-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .form-container.cafe-counter-style {
+        padding: var(--spacing-lg);
+    }
+    
+    .countdown-card, .todo-card, .advice-card {
+        padding: var(--spacing-lg);
+    }
+    
+    .post-result-message, .future-recipe-container, .share-buttons-container {
+        padding: var(--spacing-lg);
+    }
+}
+
+/* アニメーション */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.pulse {
+    animation: pulse 0.6s ease-in-out;
+}
+
+/* カスタムスクロールバー */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--primary-beige);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--warm-brown);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-brown);
+}
