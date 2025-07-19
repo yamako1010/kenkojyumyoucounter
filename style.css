@@ -57,6 +57,13 @@ html {
     scroll-padding-top: 60px; /* ヘッダー分のオフセット */
 }
 
+/* モバイル版でページトップから表示するための調整 */
+@media (max-width: 768px) {
+    html {
+        scroll-padding-top: 50px; /* モバイル用ヘッダー高さ */
+    }
+}
+
 body {
     font-family: var(--font-body);
     background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
@@ -418,7 +425,7 @@ a {
         radial-gradient(circle at 30% 20%, rgba(255, 8, 68, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 70% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
         linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
-    padding-top: 60px;
+    padding-top: 70px; /* デスクトップ用 */
     overflow: hidden;
 }
 
@@ -1301,6 +1308,14 @@ footer {
     .main-header nav ul li a {
         font-size: 0.8rem;
         padding: var(--spacing-xs);
+    }
+    
+    /* モバイル版ヒーローセクション調整 */
+    .hero-section {
+        min-height: 100vh;
+        padding-top: 60px; /* モバイル用ヘッダー高さ調整 */
+        align-items: flex-start;
+        justify-content: flex-start;
     }
     
     .hero-content {

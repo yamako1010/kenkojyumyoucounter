@@ -592,8 +592,19 @@ function setupNumberInputs() {
     }
 }
 
+// ページ読み込み時にスクロール位置をトップに固定
+function ensureTopScroll() {
+    // ページ読み込み時に必ずトップに移動
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0; // Safari用
+    document.documentElement.scrollTop = 0; // その他のブラウザ用
+}
+
 // DOMContentLoadedイベント
 document.addEventListener('DOMContentLoaded', function() {
+    // ページトップにスクロール位置を固定
+    ensureTopScroll();
+    
     // 各機能の初期化
     setupToneSelection();
     setupGenderSelection();
@@ -640,6 +651,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
         });
     });
+});
+
+// ページロード完了後も確実にトップへ
+window.addEventListener('load', function() {
+    ensureTopScroll();
+});
+
+// ページ復元時（戻るボタン等）もトップへ
+window.addEventListener('pageshow', function(event) {
+    ensureTopScroll();
 });
 
 // 追加のカスタムスタイルを動的に適用
