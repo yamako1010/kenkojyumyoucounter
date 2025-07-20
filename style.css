@@ -60,7 +60,7 @@ html {
 /* モバイル版でページトップから表示するための調整 */
 @media (max-width: 768px) {
     html {
-        scroll-padding-top: 50px; /* モバイル用ヘッダー高さ */
+        scroll-padding-top: 40px; /* モバイル用ヘッダー高さ */
     }
 }
 
@@ -1269,8 +1269,7 @@ footer {
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
     .main-header .container {
-        flex-direction: column;
-        gap: var(--spacing-xs);
+        justify-content: center;
         min-height: 40px;
     }
     
@@ -1282,7 +1281,7 @@ footer {
     /* モバイル版ヒーローセクション調整 */
     .hero-section {
         min-height: 100vh;
-        padding-top: 60px; /* モバイル用ヘッダー高さ調整 */
+        padding-top: 50px; /* モバイル用ヘッダー高さ調整 */
         align-items: flex-start;
         justify-content: flex-start;
     }
